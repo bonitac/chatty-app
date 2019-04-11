@@ -18,9 +18,6 @@ class MessageList extends Component {
       <main className="messages">
       <script src = {Message}></script>
       {messages}
-      <div className="message system">
-        Anonymous1 changed their name to nomnom.
-      </div>
     </main>
     );
   }
