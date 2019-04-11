@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {loading: true,
-      currentUser: {name: "Bob"},
+      currentUser: {name: "Anonymous"},
     messages: []};
     this.addNewMessage = this.addNewMessage.bind(this)
     this.updateUser = this.updateUser.bind(this)

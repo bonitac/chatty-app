@@ -28,6 +28,8 @@ class ChatBar extends Component {
       const newUser = event.target.value;
       this.socket.send(JSON.stringify(newUser));
       this.props.updateUser(newUser)
+      this.setState({currentUser:newUser})
+      this.props.currentUser = newUser;
       return (<div className="message system">
       Anonymous1 changed their name to nomnom.
     </div>)
