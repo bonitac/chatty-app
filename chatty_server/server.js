@@ -20,6 +20,13 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('message', (message)=>{
     console.log("got a new message: ", JSON.parse(message));
+    // const parsedMsg = JSON.parse(message);
+    wss.clients.forEach(async (client) => {
+      if (client.readyState === ws.OPEN){
+        client.send(message)
+        console.log("sent")
+      }
+    });
   })
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => console.log('Client disconnected'));
