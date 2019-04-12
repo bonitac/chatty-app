@@ -20,11 +20,17 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('message', (message)=>{
     console.log("got a new message: ", JSON.parse(message));
-    // const parsedMsg = JSON.parse(message);
+    const parsedMsg = JSON.parse(message);
     wss.clients.forEach(async (client) => {
       if (client.readyState === ws.OPEN){
+        if (parsedMsg.type === "incomingMessage"){
+          parsedMsg.type = "postMessage"
+          if (parsedMsg === "incomingNotification"){ //hmm if or else if
+            parsedMsg.type = "postNotification"
+          }
+        }
+        message = JSON.stringify(parsedMsg)
         client.send(message)
-        console.log("sent")
       }
     });
   })

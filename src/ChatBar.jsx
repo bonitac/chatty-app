@@ -18,23 +18,10 @@ class ChatBar extends Component {
   }
   handleKeyPressUser(event){
     const newUser = event.target.value;
-    this.props.updateUser(newUser)
-    // this.setState({currentUser:newUser})
-    // this.props.currentUser = newUser;
+    if (this.props.currentUser !== newUser){
+      this.props.updateUser(newUser)
+    }
   }
-  
-
-  // changeUser (event) {
-  //     const newUser = event.target.value;
-  //     this.socket.send(JSON.stringify(newUser));
-  //     this.props.updateUser(newUser)
-  //     this.setState({currentUser:newUser})
-  //     this.props.currentUser = newUser;
-  //     return (<div className="message system">
-  //     Anonymous1 changed their name to nomnom.
-  //   </div>)
-  // }
-
   render() {
     return (
       <footer className="chatbar">

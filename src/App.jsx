@@ -11,8 +11,6 @@ class App extends Component {
     messages: []};
     this.addNewMessage = this.addNewMessage.bind(this)
     this.updateUser = this.updateUser.bind(this)
-    // this.messageInput = this.messageInput.bind(this);
-    // this.changeUser = this.changeUser.bind(this);
     this.socket = new WebSocket("ws://localhost:3001");
   }
   componentDidMount(){
@@ -22,26 +20,29 @@ class App extends Component {
       console.log("connection open")
     }
     this.socket.onmessage = (event) => {
-      const message = JSON.parse(event.data)
-      const oldMessages = this.state.messages;
-      const newMessages = [...oldMessages, message];
-      this.setState({messages: newMessages})
+      console.log(event);
+      const data = JSON.parse(event.data)
+      switch(data.type) {
+        case "incomingNotification":
+        console.log("incomign notif")
+        case "postNotification":
+        console.log("post notification")
+
+        break;
+        case "postMessage":
+        case "incomingMessage":
+          const oldMessages = this.state.messages;
+          const newMessages = [...oldMessages, data];
+          this.setState({messages: newMessages})
+          break;
+        default:
+          throw new Error ("Unknown event type " + data.type);
+      }
     }
   }
 
-  changeUser (event) {
-      const newUser = event.target.value;
-      this.socket.send(JSON.stringify(newUser));
-      this.props.updateUser(newUser)
-      this.setState({currentUser:newUser})
-      this.props.currentUser = newUser;
-      return (<div className="message system">
-      Anonymous1 changed their name to nomnom.
-    </div>)
-  }
-
   addNewMessage (msg){
-    const newMessage = {content:msg, username: this.state.currentUser.name, id: uuidv1()};
+    const newMessage = {type: "incomingMessage",content:msg, username: this.state.currentUser.name, id: uuidv1()};
     console.log(newMessage)
     this.socket.send(JSON.stringify(newMessage))
   }
@@ -49,6 +50,7 @@ class App extends Component {
   updateUser (user){
     const userObj = {name: user};
     this.setState({currentUser: userObj})
+    this.socket.send(JSON.stringify({type:"incomingNotification"}))
   }
 
   render() {
@@ -66,7 +68,6 @@ class App extends Component {
         socket = {this.socket}
         addNewMessage={this.addNewMessage}
         updateUser={this.updateUser}
-        currentUser={this.state.changeUser}
         messages={this.state.messages}/>
       </div>
       
