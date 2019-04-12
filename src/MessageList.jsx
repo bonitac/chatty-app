@@ -1,34 +1,31 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
-import Notification from './Notification.jsx'
 
 class MessageList extends Component {
-  onNewPost (content){
-    messages.push(content)
+  renderFunction (messages){
+    let msgs = this.props.messages.map(message => {
+      if (message.type === 'incomingNotification' || message.type ==='postNotification'){
+        return (<div className="message system">
+           {message.content}
+          </div>)
+        
+      } else {
+        console.log("message")
+        return <Message
+        key = {message.id}
+        username = {message.username}
+        content = {message.content}
+        />
+      }
+    })
+      return msgs;
   }
 
-  handleNameChange(event){
-    console.log("yes")
-  }
-  
   render() {
-    const messages = this.props.messages.map(message => {
-      return <Message
-      key = {message.id}
-      username = {message.username}
-      content = {message.content}
-      />
-    })
-    const notification = ()=>{
-      return (<div className="message system">
-      Anonymous1 changed their name to nomnom.
-      </div>)
-    }
     return (
       <main className="messages">
       <script src = {Message}></script>
-      {messages}
-      {notification}
+      {this.renderFunction(this.props.messages)}
     </main>
     );
   }

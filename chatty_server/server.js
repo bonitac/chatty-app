@@ -12,28 +12,29 @@ const server = express()
 
 // Create the WebSockets server
 const wss = new SocketServer({ server });
+let numClient = 0;
 
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
-  console.log('Client connected');
+  numClient +=1;
+  console.log('Client connected', numClient);
+  wss.clients.forEach( (client)=> {
+      client.send(JSON.stringify(numClient))
+  })
+  
   ws.on('message', (message)=>{
     console.log("got a new message: ", JSON.parse(message));
-    const parsedMsg = JSON.parse(message);
     wss.clients.forEach(async (client) => {
       if (client.readyState === ws.OPEN){
-        if (parsedMsg.type === "incomingMessage"){
-          parsedMsg.type = "postMessage"
-          if (parsedMsg === "incomingNotification"){ //hmm if or else if
-            parsedMsg.type = "postNotification"
-          }
-        }
-        message = JSON.stringify(parsedMsg)
-        client.send(message)
+        client.send(message); 
       }
     });
   })
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
-  ws.on('close', () => console.log('Client disconnected'));
+  ws.on('close', () => {
+    numClient -= 1;
+    console.log('Client disconnected', numClient)
+  } );
 });

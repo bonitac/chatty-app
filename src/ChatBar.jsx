@@ -18,9 +18,9 @@ class ChatBar extends Component {
   }
   handleKeyPressUser(event){
     const newUser = event.target.value;
-    if (this.props.currentUser !== newUser){
+    // if (this.props.currentUser !== newUser){
       this.props.updateUser(newUser)
-    }
+    // }
   }
   render() {
     return (
