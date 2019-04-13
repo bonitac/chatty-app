@@ -1,41 +1,30 @@
-React Boilerplate
+#Chatty App
 =====================
 
-A minimal and light dev environment for ReactJS.
+Chatty is a simple, single-page messaging app. This demonstrates React and ws, a Node.js Websocket library.
 
-### Usage
+## Screenshots of Final Product
+### Posting as Anonymous
+!["Screenshot of Posting as Anonymous"]()
 
-Clone the boilerplate and create your own git repo.
+### Users Changing Ssernames
+!["Screenshot of Changing usernames"] ()
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+### User Joining the Chat After Messages
+!["Screen shot of Joining chat later"] ()
 
-Install the dependencies and start the server.
+### Receiving Messages from Another User
+!["Screen shot of Receiving Messages from Another User"] ()
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
+## Getting Started
 
-### Static Files
+1. Fork this repository, then clone your fork of this repository
+2. Install dependencies using the `npm install` command.
+3. Open 2 terminals
+3. Start the Websocket server in chatty_server directory `node server.js`
+4. Start the Express server using the command `npm start`
+5. Chat away!
 
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
 
 ### Dependencies
 
