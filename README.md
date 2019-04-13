@@ -5,16 +5,16 @@ Chatty is a simple, single-page messaging app. This demonstrates React and ws, a
 
 ## Screenshots of Final Product
 ### Posting as Anonymous
-!["Screenshot of Posting as Anonymous"]()
+!["Screenshot of Posting as Anonymous"](https://github.com/bonitac/chatty-app/blob/master/docs/posting_anonymous.png)
 
-### Users Changing Ssernames
-!["Screenshot of Changing usernames"] ()
+### Users Changing Usernames
+!["Screenshot of Changing usernames"] (https://github.com/bonitac/chatty-app/blob/master/docs/user_changing_usernames.png)
 
 ### User Joining the Chat After Messages
-!["Screen shot of Joining chat later"] ()
+!["Screen shot of Joining chat later"] (https://github.com/bonitac/chatty-app/blob/master/docs/User_Joining_After_Messages.png)
 
 ### Receiving Messages from Another User
-!["Screen shot of Receiving Messages from Another User"] ()
+!["Screen shot of Receiving Messages from Another User"] (https://github.com/bonitac/chatty-app/blob/master/docs/Receiving_Messages_from_Another_User.png)
 
 ## Getting Started
 
